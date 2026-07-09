@@ -1,0 +1,439 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// -------------------------
+// User & Auth
+// -------------------------
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String?
+  googleId     String?  @unique
+  firstName    String
+  lastName     String
+  avatarUrl    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  isActive     Boolean  @default(true)
+
+  isEmailVerified      Boolean   @default(false)
+  failedLoginAttempts  Int       @default(0)
+  lockedUntil          DateTime?
+  membershipNumber     String?   @unique
+
+  // Relations
+  roles              UserRole[]
+  memberships        Membership[]
+  attendances        Attendance[]
+  volunteerHours     VolunteerHour[]
+  badges             UserBadge[]
+  notifications      Notification[]
+  meetingParticipations MeetingParticipant[]
+  votes              Vote[]
+  courseProgresses   Progress[]
+  activityLogs       ActivityLog[]
+  auditLogs          AuditLog[]
+  sessions           Session[]
+  refreshTokens      RefreshToken[]
+  applications       Application[]
+  eventRegistrations EventRegistration[]
+  otps               Otp[]
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deviceInfo   String?
+  ipAddress    String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  expiresAt    DateTime
+}
+
+model RefreshToken {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash    String
+  deviceInfo   String?
+  ipAddress    String?
+  isRevoked    Boolean  @default(false)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+}
+
+model Otp {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  otpHash      String
+  type         String   // EMAIL_VERIFICATION, PASSWORD_RESET
+  isUsed       Boolean  @default(false)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique // GUEST, MEMBER, ADMINISTRATOR, etc.
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users       UserRole[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  name        String   @unique // e.g., "CREATE_USER", "DELETE_MEETING"
+  description String?
+  createdAt   DateTime @default(now())
+
+  roles       RolePermission[]
+}
+
+model UserRole {
+  userId String
+  roleId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+}
+
+// -------------------------
+// Applications & MVP
+// -------------------------
+
+model Application {
+  id              String   @id @default(uuid())
+  applicationNo   String   @unique
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status          String   @default("PENDING") // PENDING, UNDER_REVIEW, APPROVED, REJECTED, MORE_INFO
+
+  // Step 1: Personal Info
+  fullName        String
+  fatherName      String
+  motherName      String
+  gender          String
+  dob             DateTime
+  nationality     String
+  profilePhotoUrl String?
+
+  // Step 2: Contact Info
+  mobileNumber    String
+  altMobileNumber String?
+
+  // Step 3: Address
+  country         String
+  state           String
+  district        String
+  city            String
+  pincode         String
+  fullAddress     String
+
+  // Step 4: Education/Professional
+  occupation      String
+  organization    String?
+  qualification   String
+  skills          String?
+  areasOfInterest String?
+  volunteerExp    String?
+
+  // Step 5: Youth Assembly
+  preferredStateId     String?
+  preferredDistrictId  String?
+  preferredCommitteeId String?
+  reasonForJoining     String?
+  shortBio             String?
+
+  // Step 6: Documents
+  passportPhotoUrl String?
+  govtIdUrl        String?
+  collegeIdUrl     String?
+  resumeUrl        String?
+
+  // Step 7: Declaration
+  acceptedTerms    Boolean @default(false)
+  acceptedCode     Boolean @default(false)
+  acceptedPrivacy  Boolean @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Announcement {
+  id          String   @id @default(uuid())
+  title       String
+  content     String
+  priority    String   @default("NORMAL") // NORMAL, HIGH, EMERGENCY
+  targetAudience String @default("ALL") // ALL, MEMBERS, ADMINS
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// -------------------------
+// Organizations
+// -------------------------
+
+model State {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  code      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  districts District[]
+}
+
+model District {
+  id        String   @id @default(uuid())
+  name      String
+  stateId   String
+  state     State    @relation(fields: [stateId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  committees Committee[]
+}
+
+model Committee {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  districtId  String?
+  district    District? @relation(fields: [districtId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  memberships Membership[]
+  meetings    Meeting[]
+}
+
+model Membership {
+  id          String   @id @default(uuid())
+  userId      String
+  committeeId String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  committee   Committee @relation(fields: [committeeId], references: [id], onDelete: Cascade)
+  roleInCommittee String  @default("MEMBER") // e.g. HEAD, MEMBER
+  joinedAt    DateTime  @default(now())
+  isActive    Boolean   @default(true)
+
+  @@unique([userId, committeeId])
+}
+
+// -------------------------
+// Activities & Events
+// -------------------------
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  startDate   DateTime
+  endDate     DateTime
+  location    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  attendances       Attendance[]
+  eventRegistrations EventRegistration[]
+}
+
+model EventRegistration {
+  id          String   @id @default(uuid())
+  userId      String
+  eventId     String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  status      String   @default("REGISTERED") // REGISTERED, CANCELLED, ATTENDED
+  qrPassUrl   String?
+  createdAt   DateTime @default(now())
+
+  @@unique([userId, eventId])
+}
+
+model Attendance {
+  id        String   @id @default(uuid())
+  userId    String
+  eventId   String?
+  meetingId String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event?   @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  meeting   Meeting? @relation(fields: [meetingId], references: [id], onDelete: SetNull)
+  status    String   @default("PRESENT") // PRESENT, ABSENT, EXCUSED
+  createdAt DateTime @default(now())
+}
+
+model Certificate {
+  id           String   @id @default(uuid())
+  title        String
+  description  String?
+  issueDate    DateTime @default(now())
+  fileUrl      String
+  issuedToId   String
+  // Relation mapped indirectly via User if needed, or loosely typed
+}
+
+model VolunteerHour {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hours       Float
+  date        DateTime
+  description String
+  approvedBy  String?
+  createdAt   DateTime @default(now())
+}
+
+model Badge {
+  id          String   @id @default(uuid())
+  name        String
+  iconUrl     String
+  description String?
+  createdAt   DateTime @default(now())
+
+  users       UserBadge[]
+}
+
+model UserBadge {
+  userId  String
+  badgeId String
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badge   Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+  awardedAt DateTime @default(now())
+
+  @@id([userId, badgeId])
+}
+
+// -------------------------
+// System (Meetings, Votes, Logs)
+// -------------------------
+
+model Meeting {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  startTime   DateTime
+  endTime     DateTime
+  committeeId String?
+  committee   Committee? @relation(fields: [committeeId], references: [id], onDelete: SetNull)
+  meetingLink String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  participants MeetingParticipant[]
+  attendances  Attendance[]
+}
+
+model MeetingParticipant {
+  meetingId String
+  userId    String
+  meeting   Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt  DateTime?
+
+  @@id([meetingId, userId])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  type      String   @default("SYSTEM") // SYSTEM, MEETING, EVENT
+  createdAt DateTime @default(now())
+}
+
+model Vote {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pollId    String   // Reference to a Poll model (to be expanded)
+  choice    String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, pollId])
+}
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  entity    String
+  entityId  String
+  action    String   // CREATE, UPDATE, DELETE
+  oldValue  Json?
+  newValue  Json?
+  createdAt DateTime @default(now())
+}
+
+// -------------------------
+// Learning Hub
+// -------------------------
+
+model Course {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  lessons     Lesson[]
+}
+
+model Lesson {
+  id          String   @id @default(uuid())
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title       String
+  contentUrl  String?
+  order       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  progresses  Progress[]
+}
+
+model Progress {
+  userId      String
+  lessonId    String
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson      Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  completed   Boolean @default(false)
+  completedAt DateTime?
+
+  @@id([userId, lessonId])
+}

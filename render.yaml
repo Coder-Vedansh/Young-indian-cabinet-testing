@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: young-indian-cabinet-api
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: young-indian-cabinet-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://your-vercel-frontend-url.vercel.app # Replace this after Vercel deployment
+
+databases:
+  - name: young-indian-cabinet-db
+    databaseName: yic_db
+    user: yic_user
+    plan: free

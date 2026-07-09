@@ -1,0 +1,29 @@
+export enum Role {
+  GUEST = "GUEST",
+  MEMBER = "MEMBER",
+  VOLUNTEER = "VOLUNTEER",
+  COMMITTEE_MEMBER = "COMMITTEE_MEMBER",
+  COMMITTEE_HEAD = "COMMITTEE_HEAD",
+  DISTRICT_HEAD = "DISTRICT_HEAD",
+  STATE_HEAD = "STATE_HEAD",
+  NATIONAL_EXECUTIVE = "NATIONAL_EXECUTIVE",
+  ADMINISTRATOR = "ADMINISTRATOR",
+  SUPER_ADMINISTRATOR = "SUPER_ADMINISTRATOR",
+}
+
+export const ROLE_HIERARCHY: Record<Role, number> = {
+  [Role.GUEST]: 0,
+  [Role.MEMBER]: 1,
+  [Role.VOLUNTEER]: 2,
+  [Role.COMMITTEE_MEMBER]: 3,
+  [Role.COMMITTEE_HEAD]: 4,
+  [Role.DISTRICT_HEAD]: 5,
+  [Role.STATE_HEAD]: 6,
+  [Role.NATIONAL_EXECUTIVE]: 7,
+  [Role.ADMINISTRATOR]: 8,
+  [Role.SUPER_ADMINISTRATOR]: 9,
+};
+
+export const hasPermission = (userRole: Role, requiredRole: Role): boolean => {
+  return ROLE_HIERARCHY[userRole] >= ROLE_HIERARCHY[requiredRole];
+};

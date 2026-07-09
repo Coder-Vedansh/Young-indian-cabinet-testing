@@ -1,0 +1,35 @@
+export declare class CreateApplicationDto {
+    fullName: string;
+    fatherName: string;
+    motherName: string;
+    gender: string;
+    dob: string;
+    nationality: string;
+    profilePhotoUrl?: string;
+    mobileNumber: string;
+    altMobileNumber?: string;
+    country: string;
+    state: string;
+    district: string;
+    city: string;
+    pincode: string;
+    fullAddress: string;
+    occupation: string;
+    organization?: string;
+    qualification: string;
+    skills?: string;
+    areasOfInterest?: string;
+    volunteerExp?: string;
+    preferredStateId?: string;
+    preferredDistrictId?: string;
+    preferredCommitteeId?: string;
+    reasonForJoining?: string;
+    shortBio?: string;
+    passportPhotoUrl?: string;
+    govtIdUrl?: string;
+    collegeIdUrl?: string;
+    resumeUrl?: string;
+    acceptedTerms: boolean;
+    acceptedCode: boolean;
+    acceptedPrivacy: boolean;
+}
