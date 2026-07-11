@@ -55,17 +55,17 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar>
-      <SidebarHeader className="h-auto flex flex-col items-center justify-center border-b border-border py-6 bg-sidebar">
+    <Sidebar className="glass-sidebar border-none">
+      <SidebarHeader className="h-auto flex flex-col items-center justify-center border-b border-border/30 py-6 bg-transparent">
         {/* Placeholder for the circular seal logo. Please ensure logo.png is saved in the public/ folder. */}
-        <div className="rounded-full bg-background/5 p-2 mb-3 border border-border/50">
+        <div className="rounded-full bg-background/10 p-2 mb-3 border border-border/50 shadow-[0_0_15px_rgba(200,155,42,0.3)] transition-transform duration-500 hover:rotate-[360deg] hover:scale-110 hover:shadow-[0_0_25px_rgba(200,155,42,0.6)] cursor-pointer">
           <img src="/logo.png" alt="YIC Seal" className="w-16 h-16 object-contain rounded-full" />
         </div>
-        <span className="font-bold text-sm tracking-widest uppercase text-sidebar-primary-foreground text-center">Young India Cabinet</span>
+        <span className="font-bold text-sm tracking-widest uppercase text-sidebar-primary-foreground text-center neon-text-glow">Young India Cabinet</span>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="bg-transparent">
         <SidebarGroup>
-          <SidebarGroupLabel>Platform</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sidebar-foreground/70 uppercase tracking-wider text-xs font-semibold">Platform</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationItems.map((item) => {
@@ -73,10 +73,15 @@ export function AppSidebar() {
                 return (
                   <SidebarMenuItem key={item.title}>
                     {/* @ts-expect-error SidebarMenuButton types missing asChild prop */}
-                    <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
+                    <SidebarMenuButton 
+                      asChild 
+                      isActive={isActive} 
+                      tooltip={item.title}
+                      className={`transition-all duration-300 hover:bg-sidebar-accent/50 hover:pl-4 ${isActive ? 'neon-glow bg-sidebar-primary/20 text-sidebar-primary-foreground border-l-2 border-sidebar-primary' : 'text-sidebar-foreground/80'}`}
+                    >
                       <Link href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
+                        <item.icon className={isActive ? "text-sidebar-primary" : ""} />
+                        <span className={isActive ? "font-bold tracking-wide" : ""}>{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

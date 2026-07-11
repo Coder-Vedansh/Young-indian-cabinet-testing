@@ -11,24 +11,29 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* 1. HOME / HERO */}
-      <section id="home" className="w-full py-20 lg:py-32 xl:py-40 flex justify-center bg-gradient-to-b from-background to-muted/50 overflow-hidden relative">
-        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:32px]" />
+      <section id="home" className="w-full min-h-[90vh] py-20 lg:py-32 xl:py-40 flex items-center justify-center overflow-hidden relative">
+        {/* Futuristic Background Elements */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none animate-pulse duration-1000" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[150px] mix-blend-screen pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
         
         <div className="container px-4 md:px-6 relative z-10">
-          <div className="flex flex-col items-center text-center space-y-8">
+          <div className="flex flex-col items-center text-center space-y-8 glass-panel p-12 md:p-20 rounded-[3rem] border-t border-accent/30 mx-auto max-w-6xl shadow-[0_0_50px_rgba(0,0,0,0.5)]">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="space-y-4"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-6"
             >
-              <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary/10 text-primary hover:bg-primary/20 mb-4">
-                Version 1.0 is now live - Launching August 1st
+              <div className="inline-flex items-center rounded-full border border-accent/40 px-4 py-1.5 text-xs font-semibold tracking-widest uppercase transition-all bg-background/50 text-accent neon-glow hover:bg-accent/10 mb-6 backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse mr-2"></span>
+                Version 1.0 is now live
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter sm:text-5xl max-w-4xl mx-auto text-balance">
-                The Future Belongs to the <span className="text-primary">YOUNG INDIAN CABINET</span>
+              <h1 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter sm:text-5xl mx-auto text-balance leading-tight drop-shadow-2xl">
+                The Future Belongs to the <br />
+                <span className="text-primary neon-text-glow bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">YOUNG INDIA CABINET</span>
               </h1>
-              <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl text-balance">
+              <p className="mx-auto max-w-[800px] text-muted-foreground md:text-xl text-balance font-medium leading-relaxed">
                 Join the largest nationwide platform empowering youth leadership. Register now for the upcoming assembly and shape the nation's future.
               </p>
             </motion.div>
@@ -36,12 +41,12 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto pt-8"
             >
-              <Button size="lg" className="w-full sm:w-auto rounded-full text-lg h-14 px-8 shadow-lg shadow-primary/20" asChild>
+              <Button size="lg" className="w-full sm:w-auto rounded-full text-lg h-16 px-10 shadow-lg shadow-primary/20 neon-glow bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 transform hover:-translate-y-1" asChild>
                 <Link href={ctaLink}>
-                  Join Youth Assembly <ArrowRight className="ml-2 h-5 w-5" />
+                  Join Youth Assembly <ArrowRight className="ml-3 h-5 w-5" />
                 </Link>
               </Button>
             </motion.div>
