@@ -56,8 +56,12 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="h-16 flex items-center border-b px-6">
-        <span className="font-bold text-lg text-primary truncate">YOUNG INDIAN CABINET</span>
+      <SidebarHeader className="h-auto flex flex-col items-center justify-center border-b border-border py-6 bg-sidebar">
+        {/* Placeholder for the circular seal logo. Please ensure logo.png is saved in the public/ folder. */}
+        <div className="rounded-full bg-background/5 p-2 mb-3 border border-border/50">
+          <img src="/logo.png" alt="YIC Seal" className="w-16 h-16 object-contain rounded-full" />
+        </div>
+        <span className="font-bold text-sm tracking-widest uppercase text-sidebar-primary-foreground text-center">Young India Cabinet</span>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
