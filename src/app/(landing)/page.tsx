@@ -49,22 +49,40 @@ export default function LandingPage() {
               </div>
             </motion.div>
 
-            {/* Right side graphic/image placeholder to balance the layout */}
+            {/* Right side Modern HTML/CSS Elements with Generated Image */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="hidden lg:flex justify-center relative"
+              className="hidden lg:block relative w-full h-[500px]"
             >
-              <div className="relative w-full aspect-square max-w-md">
-                <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl" />
-                <div className="relative w-full h-full border border-border bg-card shadow-xl rounded-2xl flex items-center justify-center overflow-hidden">
-                   <div className="absolute top-0 w-full h-2 bg-accent" />
-                   <Shield className="w-32 h-32 text-muted-foreground/20" />
-                   <div className="absolute bottom-6 left-6 right-6 border-t border-border pt-4">
-                     <p className="text-xs text-muted-foreground font-mono uppercase tracking-widest text-center">YIC Official Mandate</p>
+              <div className="absolute inset-0 bg-accent/10 rounded-[3rem] transform rotate-3 scale-105 transition-transform hover:rotate-6 duration-700" />
+              <div className="relative w-full h-full rounded-[2.5rem] border border-border/50 bg-card shadow-2xl overflow-hidden group">
+                 <img src="/hero-graphic.png" alt="Young Indian Cabinet Assembly" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                 
+                 {/* Floating Glass Element */}
+                 <motion.div 
+                   animate={{ y: [0, -10, 0] }} 
+                   transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                   className="absolute bottom-8 -left-8 bg-background/80 backdrop-blur-xl border border-border/50 p-4 rounded-2xl shadow-xl flex items-center gap-4"
+                 >
+                   <div className="bg-accent/20 p-3 rounded-full text-accent">
+                     <Users className="w-6 h-6" />
                    </div>
-                </div>
+                   <div>
+                     <p className="text-sm font-bold text-foreground">National Assembly</p>
+                     <p className="text-xs text-muted-foreground">Applications Open</p>
+                   </div>
+                 </motion.div>
+                 
+                 {/* Top Right Floating Badge */}
+                 <div className="absolute top-6 right-6 bg-background/90 backdrop-blur-md border border-border px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+                   <span className="relative flex h-3 w-3">
+                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+                     <span className="relative inline-flex rounded-full h-3 w-3 bg-success"></span>
+                   </span>
+                   <span className="text-xs font-bold uppercase tracking-wider">System Live</span>
+                 </div>
               </div>
             </motion.div>
           </div>
