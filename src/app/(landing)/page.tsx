@@ -11,41 +11,60 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* 1. HOME / HERO */}
-      <section id="home" className="w-full min-h-[90vh] py-20 lg:py-32 xl:py-40 flex items-center bg-primary border-b-[12px] border-accent relative overflow-hidden">
-        {/* Structural Background pattern (strict grid) */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_2px,transparent_2px),linear-gradient(90deg,rgba(255,255,255,0.05)_2px,transparent_2px)] bg-[size:64px_64px] pointer-events-none opacity-20" />
+      <section id="home" className="w-full py-20 md:py-32 flex items-center bg-background border-b border-border relative overflow-hidden">
+        {/* Subtle pattern for texture without being overwhelming */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
         
-        <div className="container px-4 md:px-6 relative z-10 flex flex-col items-start text-left">
-          <div className="bg-background/5 border border-accent/20 p-8 md:p-16 max-w-5xl shadow-2xl backdrop-blur-sm">
+        <div className="container px-4 md:px-6 relative z-10 mx-auto max-w-6xl">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="space-y-8"
             >
-              <div className="inline-flex items-center border-l-4 border-accent px-4 py-1 text-sm font-bold tracking-widest uppercase bg-background/10 text-accent">
+              <div className="inline-flex items-center border border-accent/50 px-3 py-1 text-xs font-semibold tracking-widest uppercase bg-accent/5 text-accent rounded-sm">
                 The Constitution Reimagined
               </div>
-              <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tighter text-primary-foreground leading-[1] uppercase">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-primary leading-tight">
                 For the Youth. <br />
                 By the Youth. <br />
-                <span className="text-accent underline decoration-8 underline-offset-[16px]">To the Youth.</span>
+                <span className="text-accent">To the Youth.</span>
               </h1>
-              <p className="max-w-[700px] text-primary-foreground/80 md:text-2xl font-medium leading-relaxed border-l-4 border-accent/70 pl-6 mt-8">
-                The Young Indian Cabinet is a mandate for the future. We are building the definitive institutional framework to elevate young leaders into real-world governance.
+              <p className="max-w-[600px] text-muted-foreground md:text-lg leading-relaxed">
+                The Young Indian Cabinet is a mandate for the future. We are building the definitive institutional framework to elevate young leaders into real-world governance and policy-making.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-6 pt-8">
-                <Button size="lg" className="w-full sm:w-auto rounded-none text-lg h-16 px-10 bg-accent text-primary font-bold hover:bg-accent/90 border-2 border-accent uppercase tracking-wider" asChild>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm transition-transform hover:-translate-y-0.5" asChild>
                   <Link href={ctaLink}>
-                    Accept the Mandate <ArrowRight className="ml-3 h-5 w-5" />
+                    Accept the Mandate <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-none text-lg h-16 px-10 bg-transparent text-primary-foreground border-2 border-primary-foreground/30 hover:bg-primary-foreground/10 hover:text-primary-foreground uppercase tracking-wider" asChild>
+                <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 border-border hover:bg-muted transition-transform hover:-translate-y-0.5" asChild>
                   <Link href="#agenda">
                     Read the Agenda
                   </Link>
                 </Button>
+              </div>
+            </motion.div>
+
+            {/* Right side graphic/image placeholder to balance the layout */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="hidden lg:flex justify-center relative"
+            >
+              <div className="relative w-full aspect-square max-w-md">
+                <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl" />
+                <div className="relative w-full h-full border border-border bg-card shadow-xl rounded-2xl flex items-center justify-center overflow-hidden">
+                   <div className="absolute top-0 w-full h-2 bg-accent" />
+                   <Shield className="w-32 h-32 text-muted-foreground/20" />
+                   <div className="absolute bottom-6 left-6 right-6 border-t border-border pt-4">
+                     <p className="text-xs text-muted-foreground font-mono uppercase tracking-widest text-center">YIC Official Mandate</p>
+                   </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -53,14 +72,11 @@ export default function LandingPage() {
       </section>
 
       {/* 1.5. THE YOUTH AGENDA */}
-      <section id="agenda" className="w-full py-24 bg-background">
-        <div className="container px-4 md:px-6">
-          <div className="border-b-4 border-primary pb-8 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
-            <div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter uppercase text-primary">The Youth Agenda</h2>
-              <p className="text-muted-foreground mt-4 text-xl max-w-2xl font-medium">Our core pillars for reconstructing civic engagement and empowering the next generation of policymakers.</p>
-            </div>
-            <Shield className="w-24 h-24 text-accent opacity-20 hidden md:block" />
+      <section id="agenda" className="w-full py-20 bg-muted/30 border-b border-border">
+        <div className="container px-4 md:px-6 mx-auto max-w-6xl">
+          <div className="mb-16 md:text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-primary">The Youth Agenda</h2>
+            <p className="text-muted-foreground md:text-lg">Our core pillars for reconstructing civic engagement and empowering the next generation of policymakers.</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -69,11 +85,12 @@ export default function LandingPage() {
               { icon: Users, title: "Democratic Engagement", desc: "Building a grassroots network of politically literate youth ready to participate actively in local and national governance." },
               { icon: Globe2, title: "Future Governance", desc: "Equipping delegates with the ethical framework, leadership skills, and strategic foresight to hold public office." }
             ].map((pillar, i) => (
-              <div key={i} className="group border-2 border-border hover:border-accent p-8 transition-colors bg-card relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150" />
-                <pillar.icon className="w-12 h-12 text-primary mb-6 group-hover:text-accent transition-colors relative z-10" />
-                <h3 className="text-2xl font-bold uppercase mb-4 text-primary relative z-10">{pillar.title}</h3>
-                <p className="text-muted-foreground leading-relaxed relative z-10">{pillar.desc}</p>
+              <div key={i} className="group border border-border hover:border-accent/50 p-8 transition-all bg-card rounded-xl shadow-sm hover:shadow-md">
+                <div className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center mb-6 group-hover:bg-accent/10 transition-colors">
+                  <pillar.icon className="w-6 h-6 text-primary group-hover:text-accent transition-colors" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-primary">{pillar.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{pillar.desc}</p>
               </div>
             ))}
           </div>
