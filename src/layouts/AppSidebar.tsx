@@ -68,6 +68,7 @@ export function AppSidebar() {
                 const isActive = pathname?.startsWith(item.url);
                 return (
                   <SidebarMenuItem key={item.title}>
+                    {/* @ts-expect-error SidebarMenuButton types missing asChild prop */}
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
                       <Link href={item.url}>
                         <item.icon />

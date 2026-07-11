@@ -107,6 +107,7 @@ export default function AdminApplicationsPage() {
                     </td>
                     <td className="p-4 align-middle text-right">
                       <DropdownMenu>
+                        {/* @ts-expect-error asChild is not typed correctly in this base-ui version */}
                         <DropdownMenuTrigger asChild>
                           <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>

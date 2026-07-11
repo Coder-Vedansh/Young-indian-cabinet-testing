@@ -24,7 +24,7 @@ apiClient.interceptors.response.use(
         // Attempt to hit the refresh endpoint
         // Because of withCredentials, the HttpOnly refresh token cookie will be sent automatically
         await axios.post(
-          \`\${apiClient.defaults.baseURL}/auth/refresh\`,
+          `${apiClient.defaults.baseURL}/auth/refresh`,
           {},
           { withCredentials: true }
         );

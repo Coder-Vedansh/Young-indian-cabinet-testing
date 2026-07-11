@@ -16,7 +16,7 @@ services:
       - key: JWT_REFRESH_SECRET
         generateValue: true
       - key: CLIENT_URL
-        value: https://your-vercel-frontend-url.vercel.app # Replace this after Vercel deployment
+        value: https://young-indian-cabinet-testing.vercel.app
 
 databases:
   - name: young-indian-cabinet-db
