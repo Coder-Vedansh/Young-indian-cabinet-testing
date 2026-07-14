@@ -58,91 +58,91 @@
 }
 
 :root {
-  --background: 42 46% 94%; /* Parliament Ivory */
-  --foreground: 213 73% 12%; /* Midnight Republic */
-  --card: 0 0% 100%;
-  --card-foreground: 213 73% 12%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 213 73% 12%;
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
   
-  --primary: 213 73% 12%; /* Midnight Republic */
-  --primary-foreground: 42 46% 94%; /* Parliament Ivory */
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 10% 3.9%;
   
-  --secondary: 42 46% 94%; /* Parliament Ivory */
-  --secondary-foreground: 213 73% 12%; /* Midnight Republic */
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 0 0% 98%;
   
-  --muted: 220 16% 92%; /* Light Iron Grey */
-  --muted-foreground: 220 16% 40%;
+  --muted: 240 5% 16%;
+  --muted-foreground: 240 5% 65%;
   
-  --accent: 43 65% 47%; /* Revolution Gold */
-  --accent-foreground: 42 46% 94%;
+  --accent: 190 90% 50%;
+  --accent-foreground: 240 10% 3.9%;
   
-  --destructive: 352 65% 33%; /* Victory Crimson */
-  --destructive-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
   
-  --warning: 32 95% 44%; /* Torch Saffron */
-  --warning-foreground: 213 73% 12%;
+  --warning: 32 95% 44%;
+  --warning-foreground: 0 0% 98%;
   
-  --success: 159 75% 24%; /* Emerald India */
-  --success-foreground: 0 0% 100%;
+  --success: 159 75% 24%;
+  --success-foreground: 0 0% 98%;
   
-  --border: 43 65% 47%; /* Revolution Gold dividers */
-  --input: 220 16% 85%;
-  --ring: 43 65% 47%; /* Revolution Gold */
+  --border: 240 5% 16%;
+  --input: 240 5% 16%;
+  --ring: 190 90% 50%;
   
-  --radius: 0.25rem; /* Reduced for solid block aesthetic */
+  --radius: 0.75rem;
   
-  --sidebar: 213 73% 12%; /* Midnight Republic */
-  --sidebar-foreground: 42 46% 94%; /* Parliament Ivory */
-  --sidebar-primary: 43 65% 47%; /* Revolution Gold */
-  --sidebar-primary-foreground: 213 73% 12%;
-  --sidebar-accent: 213 73% 18%; /* Lighter Midnight */
-  --sidebar-accent-foreground: 43 65% 47%; /* Revolution Gold */
-  --sidebar-border: 43 65% 47%; /* Revolution Gold */
-  --sidebar-ring: 43 65% 47%; /* Revolution Gold */
+  --sidebar: 240 10% 3.9%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 0 0% 98%;
+  --sidebar-primary-foreground: 240 10% 3.9%;
+  --sidebar-accent: 240 4% 16%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 240 5% 16%;
+  --sidebar-ring: 190 90% 50%;
 }
 
 .dark {
-  --background: 213 73% 12%; /* Midnight Republic */
-  --foreground: 42 46% 94%; /* Parliament Ivory */
-  --card: 213 73% 16%;
-  --card-foreground: 42 46% 94%;
-  --popover: 213 73% 16%;
-  --popover-foreground: 42 46% 94%;
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
   
-  --primary: 43 65% 47%; /* Revolution Gold */
-  --primary-foreground: 213 73% 12%; /* Midnight Republic */
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 10% 3.9%;
   
-  --secondary: 220 16% 22%; /* Iron Grey */
-  --secondary-foreground: 42 46% 94%; /* Parliament Ivory */
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 0 0% 98%;
   
-  --muted: 220 16% 22%; /* Iron Grey */
-  --muted-foreground: 220 16% 75%;
+  --muted: 240 5% 16%;
+  --muted-foreground: 240 5% 65%;
   
-  --accent: 43 65% 47%; /* Revolution Gold */
-  --accent-foreground: 213 73% 12%;
+  --accent: 190 90% 50%;
+  --accent-foreground: 240 10% 3.9%;
   
-  --destructive: 352 65% 33%; /* Victory Crimson */
-  --destructive-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
   
-  --warning: 32 95% 44%; /* Torch Saffron */
-  --warning-foreground: 213 73% 12%;
+  --warning: 32 95% 44%;
+  --warning-foreground: 0 0% 98%;
   
-  --success: 159 75% 24%; /* Emerald India */
-  --success-foreground: 0 0% 100%;
+  --success: 159 75% 24%;
+  --success-foreground: 0 0% 98%;
   
-  --border: 43 65% 47%; /* Revolution Gold */
-  --input: 220 16% 35%;
-  --ring: 43 65% 47%; /* Revolution Gold */
+  --border: 240 5% 16%;
+  --input: 240 5% 16%;
+  --ring: 190 90% 50%;
   
-  --sidebar: 213 73% 10%; /* Darker Midnight */
-  --sidebar-foreground: 42 46% 94%; /* Parliament Ivory */
-  --sidebar-primary: 43 65% 47%; /* Revolution Gold */
-  --sidebar-primary-foreground: 213 73% 12%;
-  --sidebar-accent: 213 73% 16%;
-  --sidebar-accent-foreground: 43 65% 47%; /* Revolution Gold */
-  --sidebar-border: 43 65% 47%; /* Revolution Gold */
-  --sidebar-ring: 43 65% 47%; /* Revolution Gold */
+  --sidebar: 240 10% 3.9%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 0 0% 98%;
+  --sidebar-primary-foreground: 240 10% 3.9%;
+  --sidebar-accent: 240 4% 16%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 240 5% 16%;
+  --sidebar-ring: 190 90% 50%;
 }
 
 @layer base {
@@ -192,5 +192,19 @@
   
   .neon-text-glow {
     text-shadow: 0 0 8px rgba(200, 155, 42, 0.6);
+  }
+  
+  .text-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent;
+  }
+  
+  .bg-aurora {
+    background: radial-gradient(circle at top left, rgba(0, 229, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+    mix-blend-mode: screen;
+  }
+  
+  .bg-vignette {
+    background: radial-gradient(ellipse at center, transparent 0%, #09090b 100%);
   }
 }

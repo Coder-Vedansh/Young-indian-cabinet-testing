@@ -70,22 +70,26 @@ export function AppSidebar() {
             <SidebarMenu>
               {navigationItems.map((item) => {
                 const isActive = pathname?.startsWith(item.url);
-                return (
-                  <SidebarMenuItem key={item.title}>
-                    {/* @ts-expect-error SidebarMenuButton types missing asChild prop */}
-                    <SidebarMenuButton 
-                      asChild 
-                      isActive={isActive} 
-                      tooltip={item.title}
-                      className={`transition-all duration-300 hover:bg-sidebar-accent/50 hover:pl-4 ${isActive ? 'neon-glow bg-sidebar-primary/20 text-sidebar-primary-foreground border-l-2 border-sidebar-primary' : 'text-sidebar-foreground/80'}`}
-                    >
-                      <Link href={item.url}>
-                        <item.icon className={isActive ? "text-sidebar-primary" : ""} />
-                        <span className={isActive ? "font-bold tracking-wide" : ""}>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
+              return (
+                <SidebarMenuItem key={item.title}>
+                  {(function() {
+                    const AnySidebarMenuButton = SidebarMenuButton as any;
+                    return (
+                      <AnySidebarMenuButton 
+                        asChild 
+                        isActive={isActive} 
+                        tooltip={item.title}
+                        className={`transition-all duration-300 hover:bg-sidebar-accent/50 ${isActive ? 'bg-sidebar-accent shadow-sm border-l-2 border-accent' : ''}`}
+                      >
+                        <Link href={item.url}>
+                          <item.icon className="transition-transform group-hover:scale-110" />
+                          <span className="font-medium tracking-wide">{item.title}</span>
+                        </Link>
+                      </AnySidebarMenuButton>
+                    );
+                  })()}
+                </SidebarMenuItem>
+              );
               })}
             </SidebarMenu>
           </SidebarGroupContent>
